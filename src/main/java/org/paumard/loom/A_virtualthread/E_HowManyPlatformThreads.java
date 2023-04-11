@@ -29,12 +29,16 @@ public class E_HowManyPlatformThreads {
         Set<String> platformThreadNames = ConcurrentHashMap.newKeySet();
 
         var threads =
-                IntStream.range(0, 100)
+                IntStream.range(0, 1000000)
                         .mapToObj(index ->
+                        		Thread.ofVirtual().unstarted(()-> {
+                        			platformThreadNames.add(readPlatformThreadName());
+                        			poolNames.add(readThreadPoolName());
+                        		})
                                 // Just call the two methods readThreadPoolName() and
                                 // readPlatformThreadName() and add the pool name and the platform
                                 // thread name in the corresponding sets.
-                                REPLACE_WITH_YOUR_CODE
+                                // REPLACE_WITH_YOUR_CODE
                                 // How many pools is Loom using?
                                 // How many platform threads have been used for your virtual threads?
                                 // You can try to increase the number of virtual threads, to see if
